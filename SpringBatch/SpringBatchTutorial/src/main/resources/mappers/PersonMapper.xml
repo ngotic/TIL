@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.SpringBatchTutorial.mapper.PersonMapper">
+
+	<!-- 페이징 관련 설정이 없다면 무한으로 반복된다.  -->
+	<select id="getPerson"  resultType="com.example.SpringBatchTutorial.core.domain.Person">
+	<![CDATA[       
+		SELECT *  FROM person
+		where personid >= #{personid}
+		ORDER BY lastname
+		LIMIT #{_pagesize} 
+	    offset #{_skiprows} 
+		]]>
+	</select>
+	
+	<insert id="insertPerson" parameterType="com.example.SpringBatchTutorial.core.domain.Person">
+		INSERT INTO person_copy(firstName,lastName) values(#{firstName}, #{lastName})
+	</insert>
+	
+	<!-- <select id="getPersonPaging" parameterType="java.util.Map" resultType="com.example.SpringBatchTutorial.core.domain.Person">
+		SELECT * 
+		FROM 
+			person
+		ORDER BY personID asc
+		LIMIT #{_pagesize}  
+		offset #{_skiprows}
+	</select>
+	
+	<select id="countPerson" resultType="java.lang.Integer">
+		SELECT count(*) 
+		FROM 
+			person
+	</select> -->
+	
+</mapper>

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/spring_batch
+    username: postgres
+    password: 0000
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 200000
+      connection-timeout: 30000
+  batch:
+    job: 
+      names: ${job.name:NONE}
+    jdbc:
+      initialize-schema: always
+    
+mybatis:
+  mapper-locations: classpath:/mappers/*.xml
+  
+  
